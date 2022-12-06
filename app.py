@@ -22,6 +22,7 @@ def index():
             flipkartPage = uClient.read()
             uClient.close()
             flipkart_html = bs(flipkartPage, "html.parser")
+            bigboxes = flipkart_html.find_all('div', {'class': '_1AtVbE col-12-12'})
             del bigboxes[0:3]
             box = bigboxes[0]
             productLink = "https://www.flipkart.com" + box.div.div.div.a['href']
@@ -78,5 +79,5 @@ def index():
         return render_template('index.html')
 
 if __name__ == "__main__":
-    #app.run(host='127.0.0.1', port=8001, debug=True)
-	app.run(debug=True)
+    app.run(host='127.0.0.1', port=8001, debug=True)
+	#app.run(debug=True)
